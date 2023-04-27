@@ -14,10 +14,10 @@ int escolha=0;
          printf("3- listar Livros cadastrados:\n");
          printf("4- Buscar livro:\n");
          printf("5- Editar livro:\n");
-         printf("6- Consultar livro em uma dada biblioteca:\n");
+         printf("6- Consultar livro em uma data biblioteca:\n");
          printf("7- consultar quantidade de biblioteca:\n");
          printf("8- sair do programa:");
-         printf("\n escolha uma opcao:");
+         printf("\n-----escolha uma opcao------");
          scanf("%d", &escolha);
     
     switch (escolha)
