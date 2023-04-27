@@ -17,7 +17,7 @@ int escolha=0;
          printf("6- Consultar livro em uma data biblioteca:\n");
          printf("7- consultar quantidade de biblioteca:\n");
          printf("8- sair do programa:");
-         printf("\n-----escolha uma opcao------");
+         printf("\n-----escolha uma opcao------\n");
          scanf("%d", &escolha);
     
     switch (escolha)
@@ -42,10 +42,10 @@ int escolha=0;
          break;
         case 7: 
          printf("7- consultar quantidade de biblioteca:\n");
-          break;
         case 8:
-         printf("8- sair do programa:");
-         default:
+         printf("saindo do programa:");
+         break;
+        default:
          printf("Opcao invalida, tente novamente");
 
     }
