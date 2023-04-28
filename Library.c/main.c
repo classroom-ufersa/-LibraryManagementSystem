@@ -1,4 +1,6 @@
-# include<stdio.h>
+#include<stdio.h>
+#include"library.h"
+#include"Library.c"
 
 
 
