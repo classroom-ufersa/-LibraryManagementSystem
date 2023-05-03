@@ -18,7 +18,7 @@ typedef struct library
 typedef struct library
 {
 Book livro;
-library *prox;
+Library *prox;
 }Library;
 
 void adicionar_livro()
