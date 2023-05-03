@@ -18,8 +18,8 @@ typedef struct library
 typedef struct library
 {
 Book livro;
-li *prox;
-}Lista;
+library *prox;
+}Library;
 
 void adicionar_livro()
 
