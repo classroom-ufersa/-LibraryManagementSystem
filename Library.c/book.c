@@ -13,10 +13,6 @@ typedef struct book
 } Book;
 
 
-Lista *criar_lista(void){
-    returb NULL;
-}
-
 void adiciona_livro()
 {
 }
