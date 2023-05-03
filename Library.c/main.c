@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include"library.h"
-#include"Library.c"
+#include"library.c"
 
 
 
@@ -46,9 +46,10 @@ int escolha=0;
          printf("7- consultar quantidade de biblioteca:\n");
         case 8:
          printf("saindo do programa:");
+         exit(1);
          break;
         default:
-         printf("Opcao invalida, tente novamente");
+         printf("Opcao invalida, tente novamente\n");
 
     }
 }

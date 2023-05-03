@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
-#include "library.h"
+#include "book.h"
 
 typedef struct book
 {
@@ -11,6 +11,11 @@ typedef struct book
     char status[81];
     int biblioteca;
 } Book;
+
+
+Lista *criar_lista(void){
+    returb NULL;
+}
 
 void adiciona_livro()
 {
