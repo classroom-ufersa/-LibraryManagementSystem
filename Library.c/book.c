@@ -8,7 +8,7 @@ typedef struct book
 {
     char titulo[81];
     int ano;
-    char autores[81];
+    char altores[81];
     char status[81];
     int biblioteca;
 } Book;
@@ -25,11 +25,11 @@ if(novo_livro=NULL){
     printf("adicionar dados do livro...\n");
 printf("__________________________________________\n");
   printf("informe o nome do livro:\n");
-  scanf("%[^\n]s", novo_livro->titulo);
+  scanf(" %s", novo_livro->titulo);
   printf("informe o ano:\n");
   scanf("%d", novo_livro->ano);
   printf("informe o autor:\n");
-  scanf("%[^\n]s", novo_livro->autores);
+  scanf(" %s", novo_livro->altores);
   return novo_livro;
 }
 }
