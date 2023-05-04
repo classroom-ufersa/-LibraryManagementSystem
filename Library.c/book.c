@@ -3,12 +3,13 @@
 #include <ctype.h>
 #include "book.h"
 #include"library.h"
+#include <string.h>
 
 typedef struct book
 {
     char titulo[81];
     int ano;
-    char altores[81];
+    char autor[81];
     char status[81];
     int biblioteca;
 } Book;
@@ -16,20 +17,22 @@ typedef struct book
 
 Book* criar_book(void)
 {
-    
+    return NULL;
+}
+ Book * adiciona_livro(Book *l, char* titulo, int* ano, char* autor)
+ {
     Book * novo_livro =(Book*)malloc(sizeof(Book));
 if(novo_livro=NULL){
     printf("erro!!");
     exit(1);
 }else{
-    printf("adicionar dados do livro...\n");
+printf("adicionar dados do livro...\n");
 printf("__________________________________________\n");
-  printf("informe o nome do livro:\n");
-  scanf(" %s", novo_livro->titulo);
-  printf("informe o ano:\n");
-  scanf("%d", novo_livro->ano);
-  printf("informe o autor:\n");
-  scanf(" %s", novo_livro->altores);
+strcpy(novo_livro->titulo, titulo);
+strcpy(novo_livro->ano, ano);
+strcpy(novo_livro->autor, autor);
+
+
   return novo_livro;
 }
 }

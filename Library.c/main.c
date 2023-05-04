@@ -6,9 +6,12 @@
 
 
 int main(){
+    char titulo[81];
+    int ano;
+    char autor[81];
 int escolha=0; 
 
-
+//system("cls");
 
     while (escolha!= 8)
     { 
@@ -23,13 +26,24 @@ int escolha=0;
          printf("8- sair do programa:");
          printf("\n-----escolha uma opcao------\n");
          scanf("%d", &escolha);
-    
+    system("cls");
     switch (escolha)
     {
         case 1: 
         printf("1- adicionar Livro:\n");
          Book * l;
          l= criar_book();
+         printf("informe o nome do livro:\n");
+scanf(" %s", &titulo);
+printf("informe o ano:\n");
+scanf(" %d", &ano);
+printf("informe o autor:\n");
+scanf(" %s", &autor);
+ system("cls");
+
+
+           
+
         break;
         case 2: 
         printf("2- Remover Livro:\n ");
