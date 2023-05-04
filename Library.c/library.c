@@ -21,7 +21,7 @@ Library *criar_Library(void){
 }
 Library *adicionar_livro(Library* b, Book l){
  Library * novo_livro = (Library*) malloc(sizeof(Library));
-novo_livro->livro= l;
+novo_livro->livro = l;
 }
 
 

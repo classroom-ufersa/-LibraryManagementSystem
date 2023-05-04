@@ -1,12 +1,14 @@
 #include<stdio.h>
-#include"library.h"
-#include"library.c"
+
+#include"book.c"
 
 
 
 
 int main(){
 int escolha=0; 
+
+
 
     while (escolha!= 8)
     { 
@@ -25,7 +27,9 @@ int escolha=0;
     switch (escolha)
     {
         case 1: 
-        printf("1- Adicinor Livro:\n");
+        printf("1- adicionar Livro:\n");
+         Book * l;
+         l= criar_book();
         break;
         case 2: 
         printf("2- Remover Livro:\n ");
@@ -51,7 +55,8 @@ int escolha=0;
         default:
          printf("Opcao invalida, tente novamente\n");
 
-    }
+    
 }
+    }
 return 0;
 }
