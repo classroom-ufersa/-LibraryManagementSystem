@@ -12,6 +12,7 @@ typedef struct book
     char autor[81];
     char status[81];
     int biblioteca;
+    Book* prox;
 } Book;
 
 
@@ -31,17 +32,20 @@ printf("__________________________________________\n");
 strcpy(novo_livro->titulo, titulo);
 strcpy(novo_livro->ano, ano);
 strcpy(novo_livro->autor, autor);
-
-
-  return novo_livro;
+novo_livro->prox = l;
+l=novo_livro;
+  return l;
 }
 }
 void remove_livro()
 {
 }
 
-void exibe_livro()
+void exibe_livro(Book* l)
 {
+Book* p;
+for(p = l;p!=NULL; p=p->prox)
+    printf("Titulo: %s\nAno: %d\nAutor: %s", p->titulo, p->ano, p->autor);
 }
 
 void busca_livro()

@@ -40,16 +40,14 @@ scanf(" %d", &ano);
 printf("informe o autor:\n");
 scanf(" %s", &autor);
  system("cls");
-
-
-           
-
         break;
         case 2: 
         printf("2- Remover Livro:\n ");
          break;
         case 3:
         printf("3- listar Livros cadastrados:\n");
+       exibe_livro(l);
+    
          break;
         case 4:
          printf("4- Buscar livro:\n");
@@ -67,7 +65,7 @@ scanf(" %s", &autor);
          exit(1);
          break;
         default:
-         printf("Opcao invalida, tente novamente\n");
+         printf("Opcao invalida, tente novamente\n\t\n\t\n");
 
     
 }
