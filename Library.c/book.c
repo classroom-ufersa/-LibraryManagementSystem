@@ -13,30 +13,51 @@ typedef struct book
     char status[81];
     int biblioteca;
     Book* prox;
+     Book* prim;
 } Book;
+ 
 
 
 Book* criar_book(void)
 {
-    return NULL;
+    Book* livro =(Book*)malloc(sizeof(Book));
+    if(livro==NULL){
+        printf("ERRO");
+        exit(1);
+    }
+    livro->prim = NULL;
+    return livro;
 }
  Book * adiciona_livro(Book *l, char* titulo, int* ano, char* autor)
  {
-    Book * novo_livro =(Book*)malloc(sizeof(Book));
+    Book* novo_livro;
+    Book* ant = NULL;
+    Book* p=l->prim;
+    while(p!=NULL && strcmp(p->titulo,titulo)<0){
+        ant=p;
+        p=p->prox;
+    }
+    novo_livro =(Book*)malloc(sizeof(Book));
 if(novo_livro=NULL){
+    system("cls");
     printf("erro!!");
     exit(1);
-}else{
-printf("adicionar dados do livro...\n");
-printf("__________________________________________\n");
+}
+/*printf("adicionar dados do livro...\n");
+printf("__________________________________________\n");*/
 strcpy(novo_livro->titulo, titulo);
 strcpy(novo_livro->ano, ano);
 strcpy(novo_livro->autor, autor);
-novo_livro->prox = l;
-l=novo_livro;
+if(ant==NULL){
+novo_livro->prox = l->prim;
+l->prim= novo_livro;
+}else{
+    novo_livro->prox=ant->prox;
+    ant->prox=novo_livro;
+}
   return l;
 }
-}
+
 void remove_livro()
 {
 }
@@ -44,10 +65,10 @@ void remove_livro()
 void exibe_livro(Book* l)
 {
 Book* p;
-for(p = l;p!=NULL; p=p->prox)
-    printf("Titulo: %s\nAno: %d\nAutor: %s", p->titulo, p->ano, p->autor);
+for(p = l->prim; p!=NULL; p=p->prox){
+    printf("Titulo: %s\nAno: %d\nAutor: %s\n----------------------\n", p->titulo, p->ano, p->autor);
 }
-
+}
 void busca_livro()
 {
 }

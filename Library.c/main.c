@@ -46,8 +46,8 @@ scanf(" %s", &autor);
          break;
         case 3:
         printf("3- listar Livros cadastrados:\n");
+       
        exibe_livro(l);
-    
          break;
         case 4:
          printf("4- Buscar livro:\n");
@@ -60,6 +60,7 @@ scanf(" %s", &autor);
          break;
         case 7: 
          printf("7- consultar quantidade de biblioteca:\n");
+         break;
         case 8:
          printf("saindo do programa:");
          exit(1);
