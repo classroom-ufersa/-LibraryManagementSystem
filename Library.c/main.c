@@ -33,13 +33,13 @@ int escolha=0;
         printf("1- adicionar Livro:\n");
          Book * l;
          l= criar_book();
-         printf("informe o nome do livro:\n");
+printf("informe o nome do livro:\n");
 scanf(" %s", &titulo);
 printf("informe o ano:\n");
 scanf(" %d", &ano);
 printf("informe o autor:\n");
 scanf(" %s", &autor);
- system("cls");
+system("cls");
         break;
         case 2: 
         printf("2- Remover Livro:\n ");
