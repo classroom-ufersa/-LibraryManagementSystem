@@ -13,71 +13,66 @@ typedef struct book
     char status[81];
     int biblioteca;
     Book* prox;
-     Book * prim;
+
 } Book;
- 
-  
-  
 
+///Estrutura de uma lista que guarda o endere�o do primeiro elemento da lista do Book.
+typedef struct lista{
+    Book* prim;
+}Lista;
 
-Book* criar_book(void)
-{
-    Book* livro =(Book*)malloc(sizeof(Book));
-    if(livro==NULL){
-        printf("ERRO");
+///Fun�ao que cria uma lista vazia.
+Lista* cria_lista(void){
+    Lista* l = (Lista*) malloc(sizeof(Lista));
+    if(l == NULL){
+        printf("\n\nErro de sistema lista\n");
         exit(1);
     }
-    livro->prim = NULL;
-    return livro;
+    l->prim = NULL;
+    return l;
 }
- Book * adiciona_livro(Book *l, char* titulo, int* ano, char* autor)
- {
-    Book* novo_livro;
+
+///Fun�ao que insere um Book na lista.
+Lista* cadastro_Book(Lista* l, char* titulo, int ano, char* autor){
+    Book* novo;
     Book* ant = NULL;
-    Book* p=l->prim;
-    while(p!=NULL && strcmp(p->titulo,titulo)<0){
-        ant=p;
-        p=p->prox;
+    Book* p = l->prim;
+    while(p != NULL && strcmp(p->titulo,titulo)<0){
+        ant = p;
+        p = p->prox;
     }
-    novo_livro =(Book*)malloc(sizeof(Book));
-if(novo_livro=NULL){
-   
-    printf("erro!!");
-    exit(1);
-     system("cls");
-}
-/*printf("adicionar dados do livro...\n");
-printf("__________________________________________\n");*/
-strcpy(novo_livro->titulo, titulo);
-strcpy(novo_livro->ano, ano);
-strcpy(novo_livro->autor, autor);
-    printf("Titulo: %s\nAno: %d\nAutor: %s\n----------------------\n", novo_livro->titulo, novo_livro->ano, novo_livro->autor);
-if(ant==NULL){
-novo_livro->prox = l->prim;
-l->prim = novo_livro;
-}else{
-    novo_livro->prox=ant->prox;
-    ant->prox =novo_livro;
-}
-l=novo_livro;
-  return l;
+    novo = (Book*) malloc(sizeof(Book));
+    if(novo == NULL){
+        system("cls");
+        printf("Erro no sistema de cadastro.");
+        exit(1);
+    }
+    strcpy(novo->titulo, titulo);
+    strcpy(novo->ano, ano);
+    strcpy(novo->autor, autor);
+    if(ant == NULL){
+        novo->prox = l->prim;
+        l->prim=novo;
+    }else{
+        novo->prox = ant->prox;
+        ant->prox = novo;
+    }
+    return l;
 }
 
 void remove_livro()
 {
 }
 
-void exibe_livro(Book* l)
-{
-Book* p;
-for(p = l->prim; p!=NULL; p=p->prox){
-     
-}
-}
+void imprime_lista(Lista* l){
+    Book* aux;
+    for(aux = l->prim; aux != NULL; aux = aux->prox){
+        printf("");
+    }
+    }
 void busca_livro()
 {
 }
-
 void edita_livro()
 {
 }

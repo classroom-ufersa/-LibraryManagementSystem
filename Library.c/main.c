@@ -11,8 +11,6 @@ int main(){
     char autor[81];
 int escolha=0; 
 
-//system("cls");
-
     while (escolha!= 8)
     { 
          printf("-------MENU--------\n");
@@ -31,8 +29,8 @@ int escolha=0;
     {
         case 1: 
         printf("1- adicionar Livro:\n");
-         Book * l;
-         l= criar_book();
+         Lista * l;
+         l= criar_lista();
 printf("informe o nome do livro:\n");
 scanf(" %s", &titulo);
 printf("informe o ano:\n");
@@ -46,8 +44,6 @@ system("cls");
          break;
         case 3:
         printf("3- listar Livros cadastrados:\n");
-       
-       exibe_livro(l);
          break;
         case 4:
          printf("4- Buscar livro:\n");
