@@ -13,9 +13,11 @@ typedef struct book
     char status[81];
     int biblioteca;
     Book* prox;
-     Book* prim;
+     Book * prim;
 } Book;
  
+  
+  
 
 
 Book* criar_book(void)
@@ -39,22 +41,25 @@ Book* criar_book(void)
     }
     novo_livro =(Book*)malloc(sizeof(Book));
 if(novo_livro=NULL){
-    system("cls");
+   
     printf("erro!!");
     exit(1);
+     system("cls");
 }
 /*printf("adicionar dados do livro...\n");
 printf("__________________________________________\n");*/
 strcpy(novo_livro->titulo, titulo);
 strcpy(novo_livro->ano, ano);
 strcpy(novo_livro->autor, autor);
+    printf("Titulo: %s\nAno: %d\nAutor: %s\n----------------------\n", novo_livro->titulo, novo_livro->ano, novo_livro->autor);
 if(ant==NULL){
 novo_livro->prox = l->prim;
-l->prim= novo_livro;
+l->prim = novo_livro;
 }else{
     novo_livro->prox=ant->prox;
-    ant->prox=novo_livro;
+    ant->prox =novo_livro;
 }
+l=novo_livro;
   return l;
 }
 
@@ -66,7 +71,7 @@ void exibe_livro(Book* l)
 {
 Book* p;
 for(p = l->prim; p!=NULL; p=p->prox){
-    printf("Titulo: %s\nAno: %d\nAutor: %s\n----------------------\n", p->titulo, p->ano, p->autor);
+     
 }
 }
 void busca_livro()
