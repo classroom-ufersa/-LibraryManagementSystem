@@ -1,78 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
+#include "string.h"
 #include "book.h"
-#include"library.h"
-#include <string.h>
+
 
 typedef struct book
 {
-    char titulo[81];
+    char titulo[50];
+    char autor[50];
     int ano;
-    char autor[81];
-    char status[81];
-    int biblioteca;
-    Book* prox;
+}Book;
+///Estrutura de uma lista
+struct lista{
+    Book livro;
+struct lista * prox;
 
-} Book;
-
-///Estrutura de uma lista que guarda o endere�o do primeiro elemento da lista do Book.
-typedef struct lista{
-    Book* prim;
-}Lista;
+};
 
 ///Fun�ao que cria uma lista vazia.
 Lista* cria_lista(void){
-    Lista* l = (Lista*) malloc(sizeof(Lista));
-    if(l == NULL){
-        printf("\n\nErro de sistema lista\n");
-        exit(1);
-    }
-    l->prim = NULL;
-    return l;
+    return NULL;
 }
 
-///Fun�ao que insere um Book na lista.
-Lista* cadastro_Book(Lista* l, char* titulo, int ano, char* autor){
-    Book* novo;
-    Book* ant = NULL;
-    Book* p = l->prim;
-    while(p != NULL && strcmp(p->titulo,titulo)<0){
-        ant = p;
-        p = p->prox;
-    }
-    novo = (Book*) malloc(sizeof(Book));
-    if(novo == NULL){
-        system("cls");
-        printf("Erro no sistema de cadastro.");
-        exit(1);
-    }
-    strcpy(novo->titulo, titulo);
-    strcpy(novo->ano, ano);
-    strcpy(novo->autor, autor);
-    if(ant == NULL){
-        novo->prox = l->prim;
-        l->prim=novo;
-    }else{
-        novo->prox = ant->prox;
-        ant->prox = novo;
-    }
-    return l;
+///Fun�ao que insere um livro na lista.
+Lista* cadastro_Book(Lista* l, char* titulo, char* autor, int* ano){
+Lista* novo = (Lista*)malloc(sizeof(Lista));
+if(novo == NULL){
+    printf("\nERRO AO CADASTRAR BOOK!");
+    exit(1);
 }
-
-void remove_livro()
-{
+novo->livro.titulo,titulo;
+novo->livro.autor,autor;
+novo->livro.ano,ano;
+novo->prox = l;
+printf("\nLIVRO CADASTRADO COM SUCESSO...");
+ return novo;
 }
 
 void imprime_lista(Lista* l){
-    Book* aux;
-    for(aux = l->prim; aux != NULL; aux = aux->prox){
-        printf("");
+    Lista* aux;
+    if(aux == NULL){
+        printf("ERRO AO EXIBIR...");
+    }else{
+    for(aux = l; aux != NULL; aux = aux->prox){
+        printf("Nome: %s\nAutor: %s\nAno: %d\n",aux->livro.titulo,aux->livro.autor,aux->livro.ano);
+        }
     }
-    }
-void busca_livro()
-{
-}
-void edita_livro()
-{
 }

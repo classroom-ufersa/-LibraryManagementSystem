@@ -1,2 +1,2 @@
 typedef struct book Book;
-typedef struct lista;
+typedef struct lista Lista;

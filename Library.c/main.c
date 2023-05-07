@@ -1,71 +1,69 @@
 #include<stdio.h>
-
+#include <string.h>
 #include"book.c"
 
 
 
 
 int main(){
-    char titulo[81];
+    char titulo[50];
+    char autor[50];
     int ano;
-    char autor[81];
-int escolha=0; 
-
-    while (escolha!= 8)
-    { 
-         printf("-------MENU--------\n");
-         printf("1- Adicinor Livro:\n");
-         printf("2- Remover Livro:\n");
-         printf("3- listar Livros cadastrados:\n");
-         printf("4- Buscar livro:\n");
-         printf("5- Editar livro:\n");
-         printf("6- Consultar livro em uma data biblioteca:\n");
-         printf("7- consultar quantidade de biblioteca:\n");
-         printf("8- sair do programa:");
-         printf("\n-----escolha uma opcao------\n");
-         scanf("%d", &escolha);
-    system("cls");
-    switch (escolha)
-    {
-        case 1: 
-        printf("1- adicionar Livro:\n");
-         Lista * l;
-         l= criar_lista();
-printf("informe o nome do livro:\n");
-scanf(" %s", &titulo);
-printf("informe o ano:\n");
-scanf(" %d", &ano);
-printf("informe o autor:\n");
-scanf(" %s", &autor);
-system("cls");
-        break;
-        case 2: 
-        printf("2- Remover Livro:\n ");
-         break;
-        case 3:
-        printf("3- listar Livros cadastrados:\n");
-         break;
-        case 4:
-         printf("4- Buscar livro:\n");
-          break;
-        case 5:
-        printf("5- Editar livro:\n"); 
-         break;
-        case 6: 
-        printf("6- Consultar livro em uma dada biblioteca:\n");
-         break;
-        case 7: 
-         printf("7- consultar quantidade de biblioteca:\n");
-         break;
-        case 8:
-         printf("saindo do programa:");
-         exit(1);
-         break;
-        default:
-         printf("Opcao invalida, tente novamente\n\t\n\t\n");
-
+    int op=0, o; 
+    Lista * l;
+   
     
-}
+    do 
+        {
+         system("cls");
+        printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
+        printf("[1] - CADASTRA LIVRO NA BIBLIOTECA\n");
+        printf("[2] - REMOVER LIVRO\n");
+        printf("[3] - LISTAR LIVROS CADASTRADOS\n");
+        printf("[4] - BUSCAR LIVRO\n");
+        printf("[5] - EDITAR LIVRO\n");
+        printf("[6] - CONSUTAR LIVRO EM UMA DADA BIBLIOTECA\n");
+        printf("[7] - CONSULTAR QUANTITATIVO DE BIBLIOTECA\n");
+        printf("[8] - SAIR DO PROGRAMA\n");
+        printf("\n>>> ");
+        scanf("%d", &op);
+        system("cls");
+
+    switch (op)
+    {
+        case 1:
+        l = cria_lista();
+        system("cls");
+        printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
+        printf("INFORME O NOME DO LIVRO\n");
+        printf(">>> ");
+        scanf("%s", &titulo);
+        printf("\nINFORME O AUTOR DO LIVRO\n");
+        printf(">>> ");
+        scanf("%s", &autor);
+        printf("\nINFORME O ANO DO LIVRO\n");
+        printf(">>> ");
+        scanf("%d", &ano);
+        
+        l = cadastro_Book(l, titulo, autor, ano);
+         imprime_lista(l);
+            break;
+        case 3:
+        
+            break;
+        case 8:
+        printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
+        printf("DESEJA SAIR DO PROGRAMA\n");
+        printf("[1] - SIM\n[2] - NAO\n");
+        printf("\n>>> ");
+        scanf("%d", &o);
+        if(o == 1){
+         printf("OBRIGADO POR USAR O SISTEMA\n");
+        exit(1);
+        }    
+            break;
+
     }
-return 0;
+        }while(op == 8);
+    return 0;
 }
