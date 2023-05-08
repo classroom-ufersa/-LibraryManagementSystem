@@ -1,21 +1,18 @@
-#include<stdio.h>
+#include <stdio.h>
 #include <string.h>
-#include"book.c"
+#include "book.c"
 
-
-
-
-int main(){
+int main()
+{
     char titulo[50];
     char autor[50];
     int ano;
-    int op=0, o; 
-    Lista * l;
-   
-    
-    do 
-        {
-         system("cls");
+    int op = 0, o;
+    Lista *l;
+
+    do
+    {
+        system("cls");
         printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
         printf("[1] - CADASTRA LIVRO NA BIBLIOTECA\n");
         printf("[2] - REMOVER LIVRO\n");
@@ -29,35 +26,37 @@ int main(){
         scanf("%d", &op);
         system("cls");
 
-    switch (op)
-    {
+        switch (op)
+        {
         case 1:
-       // Lista * l;
-        l = cria_lista();
-        
-        l = cadastro_Book(l);
-         
+            // Lista * l;
+            l = cria_lista();
+
+            l = cadastro_Book(l);
+
             break;
         case 3:
-        //Lista * l;
-        imprime_lista(l);
+            // Lista * l;
+            imprime_lista(l);
             break;
         case 8:
-        printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
-        printf("DESEJA SAIR DO PROGRAMA\n");
-        printf("[1] - SIM\n[2] - NAO\n");
-        printf("\n>>> ");
-        scanf("%d", &o);
-        if(o == 1){
-         printf("OBRIGADO POR USAR O SISTEMA\n");
-         printf("VOLTE SEMPRE...\n");
-        exit(1);
-        } else{
-            op = 2;
+            printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
+            printf("DESEJA SAIR DO PROGRAMA?\n");
+            printf("[1] - SIM\n[2] - NAO\n");
+            printf("\n>>> ");
+            scanf("%d", &o);
+            if (o == 1)
+            {
+                printf("OBRIGADO POR USAR O SISTEMA\n");
+                printf("VOLTE SEMPRE...\n");
+                exit(1);
+            }
+            else
+            {
+                op = 2;
+            }
+            break;
         }
-        break;
-
-    }
-        }while(op != 8);
+    } while (op != 8);
     return op;
 }
