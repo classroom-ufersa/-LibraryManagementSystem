@@ -23,17 +23,26 @@ Lista* cria_lista(void){
 }
 
 ///Fun�ao que insere um livro na lista.
-Lista* cadastro_Book(Lista* l, char* titulo, char* autor, int* ano){
+Lista* cadastro_Book(Lista* l){
 Lista* novo = (Lista*)malloc(sizeof(Lista));
 if(novo == NULL){
     printf("\nERRO AO CADASTRAR BOOK!");
     exit(1);
 }
-novo->livro.titulo,titulo;
-novo->livro.autor,autor;
-novo->livro.ano,ano;
-novo->prox = l;
-printf("\nLIVRO CADASTRADO COM SUCESSO...");
+system("cls");
+        printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
+        printf("INFORME O NOME DO LIVRO\n");
+        printf(">>> ");
+        scanf("%s", &novo->livro.titulo);
+        printf("\nINFORME O AUTOR DO LIVRO\n");
+        printf(">>> ");
+        scanf("%s", &novo->livro.autor);
+        printf("\nINFORME O ANO DO LIVRO\n");
+        printf(">>> ");
+        scanf("%d", &novo->livro.ano);
+        novo->prox = l;
+printf("\nLIVRO CADASTRADO COM SUCESSO...\n");
+ system("pause");
  return novo;
 }
 
@@ -44,6 +53,7 @@ void imprime_lista(Lista* l){
     }else{
     for(aux = l; aux != NULL; aux = aux->prox){
         printf("Nome: %s\nAutor: %s\nAno: %d\n",aux->livro.titulo,aux->livro.autor,aux->livro.ano);
+        system("pause");
         }
     }
 }
