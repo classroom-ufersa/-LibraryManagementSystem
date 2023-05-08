@@ -32,24 +32,15 @@ int main(){
     switch (op)
     {
         case 1:
+       // Lista * l;
         l = cria_lista();
-        system("cls");
-        printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
-        printf("INFORME O NOME DO LIVRO\n");
-        printf(">>> ");
-        scanf("%s", &titulo);
-        printf("\nINFORME O AUTOR DO LIVRO\n");
-        printf(">>> ");
-        scanf("%s", &autor);
-        printf("\nINFORME O ANO DO LIVRO\n");
-        printf(">>> ");
-        scanf("%d", &ano);
         
-        l = cadastro_Book(l, titulo, autor, ano);
-         imprime_lista(l);
+        l = cadastro_Book(l);
+         
             break;
         case 3:
-        
+        //Lista * l;
+        imprime_lista(l);
             break;
         case 8:
         printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
@@ -59,11 +50,14 @@ int main(){
         scanf("%d", &o);
         if(o == 1){
          printf("OBRIGADO POR USAR O SISTEMA\n");
+         printf("VOLTE SEMPRE...\n");
         exit(1);
-        }    
-            break;
+        } else{
+            op = 2;
+        }
+        break;
 
     }
-        }while(op == 8);
-    return 0;
+        }while(op != 8);
+    return op;
 }
