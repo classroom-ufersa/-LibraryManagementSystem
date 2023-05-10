@@ -41,13 +41,18 @@ system("cls");
         printf(">>> ");
         scanf("%d", &novo->livro.ano);
         novo->prox = l;
+        l= novo;
+        system("cls");
 printf("\nLIVRO CADASTRADO COM SUCESSO...\n");
  system("pause");
- return novo;
+ return l;
 }
 
+
+
 void imprime_lista(Lista* l){
-    Lista* aux;
+    lista_vazia(l);
+    Lista* aux = l;
     if(aux == NULL){
         printf("ERRO AO EXIBIR...");
     }else{
@@ -56,4 +61,41 @@ void imprime_lista(Lista* l){
         system("pause");
         }
     }
+}
+
+
+Lista* busca_nome(Lista* l, char* nome){
+    Lista* aux;
+    for(aux = l; aux != NULL; aux = aux->prox){
+        if(aux->livro.titulo == nome){
+        printf("Nome: %s\nAutor: %s\nAno: %d\n",aux->livro.titulo,aux->livro.autor,aux->livro.ano);
+            return aux->prox;
+        }
+        printf("livro nao encontrado...\n");
+        system("pause");
+    }
+    return NULL;
+}
+int lista_vazia(Lista* l){
+    if(l == NULL){
+        printf("nenhum livro cadastrado...\n");
+    }
+    return 0;
+}
+
+
+
+void insere_arquivoP(Lista* l, FILE* fp){
+    fp = fopen("biblioteca.txt", "w"); // Abre o arquivo_origem para leitura
+    if (fp == NULL)
+    {
+        printf("Erro ao abrir o sistema\n");
+        system("pause");
+    }
+   
+    Lista* aux;
+    for(aux = l; aux != NULL; aux = aux->prox){
+        fprintf(fp, "Nome: %s\nAutor: %s\nAno: %d\n",aux->livro.titulo,aux->livro.autor,aux->livro.ano);
+    }
+    fclose(fp);
 }

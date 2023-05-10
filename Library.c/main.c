@@ -1,18 +1,18 @@
 #include<stdio.h>
 #include <string.h>
 #include"book.c"
-
+//#include "Library.c"
 
 
 
 int main(){
-    char titulo[50];
+ 
+    int op=0, o; 
+    char titulo[50], nome[50];
     char autor[50];
     int ano;
-    int op=0, o; 
     Lista * l;
-   
-    
+    FILE* fp;
     do 
         {
          system("cls");
@@ -32,14 +32,24 @@ int main(){
     switch (op)
     {
         case 1:
-        Lista * l;
+       
         l = cria_lista();
-        l = cadastro_Book(l);
+        l= cadastro_Book(l);
+        insere_arquivoP(l, fp);
          
             break;
         case 3:
         printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
+        lista_vazia(l);
         imprime_lista(l);
+            break;
+        case 4:
+        printf("INFORME O NOME DO LIVRO\n");
+        printf(">>> ");
+        scanf("%s", &nome);
+        lista_vazia(l);
+        busca_nome(l, nome);
+
             break;
         case 8:
         printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
@@ -57,7 +67,10 @@ int main(){
             op = 2;
         }
         break;
-
+        
+        default:
+        printf("Opcao invalida. Tente novamente.\n\n");
+        system("pause");
     }
         }while(op != 8);
     return op;
