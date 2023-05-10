@@ -1,18 +1,18 @@
-#include<stdio.h>
+#include <stdio.h>
 #include <string.h>
 #include"book.c"
-//#include "Library.c"
+
 
 
 
 int main(){
- 
-    int op=0, o; 
-    char titulo[50], nome[50];
+    char titulo[50];
     char autor[50];
     int ano;
+    int op=0, o; 
     Lista * l;
-    FILE* fp;
+   
+    
     do 
         {
          system("cls");
@@ -29,27 +29,18 @@ int main(){
         scanf("%d", &op);
         system("cls");
 
-    switch (op)
-    {
+        switch (op)
+        {
         case 1:
-       
+       // Lista * l;
         l = cria_lista();
-        l= cadastro_Book(l);
-        insere_arquivoP(l, fp);
+        
+        l = cadastro_Book(l);
          
             break;
         case 3:
-        printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
-        lista_vazia(l);
+        //Lista * l;
         imprime_lista(l);
-            break;
-        case 4:
-        printf("INFORME O NOME DO LIVRO\n");
-        printf(">>> ");
-        scanf("%s", &nome);
-        lista_vazia(l);
-        busca_nome(l, nome);
-
             break;
         case 8:
         printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
@@ -58,19 +49,14 @@ int main(){
         printf("\n>>> ");
         scanf("%d", &o);
         if(o == 1){
-            system("cls");
-         printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
-         printf("\tOBRIGADO POR USAR NOSSO SISTEMA\n");
-         printf("\t>>>VOLTE SEMPRE<<<\n");
+         printf("OBRIGADO POR USAR O SISTEMA\n");
+         printf("VOLTE SEMPRE...\n");
         exit(1);
         } else{
             op = 2;
         }
         break;
-        
-        default:
-        printf("Opcao invalida. Tente novamente.\n\n");
-        system("pause");
+
     }
         }while(op != 8);
     return op;
