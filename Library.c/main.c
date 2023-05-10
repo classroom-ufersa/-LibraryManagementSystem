@@ -32,14 +32,15 @@ int main(){
         switch (op)
         {
         case 1:
-       // Lista * l;
         l = cria_lista();
-        
-        l = cadastro_Book(l);
+        system("cls");
+         printf("INFORME O NOME DO LIVRO\n");
+        printf(">>> ");
+        scanf("%s", &titulo);
+        cadastro_Book(l, titulo);
          
             break;
         case 3:
-        //Lista * l;
         imprime_lista(l);
             break;
         case 8:

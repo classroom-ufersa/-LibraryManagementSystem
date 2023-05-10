@@ -10,44 +10,61 @@ typedef struct book
     int ano;
     char status[51];
     char biblioteca[51];
+    Book* prox;
 } Book;
 /// Estrutura de uma lista
 struct lista
 {
-    Book livro;
-    struct lista *prox;
+     Book* prim;
 };
+
+
 
 /// Fun�ao que cria uma lista vazia.
 Lista *cria_lista(void)
 {
-    return NULL;
+    Lista* l = (Lista*) malloc(sizeof(Lista));
+    if(l == NULL){
+        printf("\n\nErro de sistema lista\n");
+        system("pause");
+        exit(1);
+    }
+    l->prim= NULL;
+    return l;
 }
 
 ///Fun�ao que insere um livro na lista.
-Lista* cadastro_Book(Lista* l){
-Lista* novo = (Lista*)malloc(sizeof(Lista));
+Lista* cadastro_Book(Lista* l, char* titulo){
+    Book* novo;
+    Book* ant = NULL;
+    Book* p = l->prim;
+    while(p != NULL && strcmp(p->titulo, titulo)<0){
+        ant = p;
+        p = p->prox;
+    }
+    novo = (Book*)malloc(sizeof(Book));
 if(novo == NULL){
     printf("\nERRO AO CADASTRAR BOOK!");
     exit(1);
 }
-system("cls");
-        printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
-        printf("INFORME O NOME DO LIVRO\n");
-        printf(">>> ");
-        scanf("%s", &novo->livro.titulo);
         printf("\nINFORME O AUTOR DO LIVRO\n");
         printf(">>> ");
-        scanf("%s", &novo->livro.autor);
+        scanf("%s", novo->autor);
         printf("\nINFORME O ANO DO LIVRO\n");
         printf(">>> ");
-        scanf("%d", &novo->livro.ano);
-        novo->prox = l;
-printf("\nLIVRO CADASTRADO COM SUCESSO...\n");
+        scanf("%d", novo->ano);
+  if(ant == NULL){
+        novo->prox = l->prim;
+        l->prim=novo;
+    }else{
+        novo->prox = ant->prox;
+        ant->prox = novo;
+    }
+    printf("\nLIVRO CADASTRADO COM SUCESSO...\n");
  system("pause");
- return novo;
+    return l;
 }
-
+/*
 void imprime_lista(Lista* l){
     Lista* aux;
     if(aux == NULL){
@@ -64,18 +81,24 @@ void imprime_lista(Lista* l){
 }
 
 
+
+
+
 Lista* busca_nome(Lista* l, char* nome){
-    Lista* aux;
+    Lista* aux = l;
+
     for(aux = l; aux != NULL; aux = aux->prox){
         if(aux->livro.titulo == nome){
         printf("Nome: %s\nAutor: %s\nAno: %d\n",aux->livro.titulo,aux->livro.autor,aux->livro.ano);
-            return aux->prox;
+            return aux;
         }
         printf("livro nao encontrado...\n");
         system("pause");
     }
     return NULL;
 }
+
+
 int lista_vazia(Lista* l){
     if(l == NULL){
         printf("nenhum livro cadastrado...\n");
@@ -83,7 +106,7 @@ int lista_vazia(Lista* l){
     return 0;
 }
 
-
+*/
 
 void insere_arquivoP(Lista* l, FILE* fp){
     fp = fopen("biblioteca.txt", "w"); // Abre o arquivo_origem para leitura
@@ -93,9 +116,9 @@ void insere_arquivoP(Lista* l, FILE* fp){
         system("pause");
     }
    
-    Lista* aux;
-    for(aux = l; aux != NULL; aux = aux->prox){
-        fprintf(fp, "Nome: %s\nAutor: %s\nAno: %d\n",aux->livro.titulo,aux->livro.autor,aux->livro.ano);
+    Book* aux;
+    for(aux = l->prim; aux != NULL; aux = aux->prox){
+        fprintf(fp, "Nome: %s\nAutor: %s\nAno: %d\n",aux->titulo,aux->autor,aux->ano);
     }
     fclose(fp);
 }
