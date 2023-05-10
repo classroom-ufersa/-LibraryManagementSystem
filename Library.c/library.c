@@ -5,8 +5,7 @@
 #define TAM_LINHA 100
 
 
-
-
+/*
 int salvar_livros(Lista *l)
 {
     FILE *arquivo_origem;
@@ -21,13 +20,18 @@ int salvar_livros(Lista *l)
         exit(1);
     }
    
-}
+}*/
 ///Fun�ao que salva as informa�oes da lista no arquivo.
 void insere_arquivoP(Lista* l, FILE* fp){
-    salvar_livros(l);
-    Lista* aux;
+fp = fopen("biblioteca.txt", "r"); // Abre o arquivo_origem para leitura
+    if (fp == NULL)
+    {
+        printf("Erro ao abrir o sistema\n");
+        exit(1);
+    }
+    Book* aux;
     for(aux = l; aux != NULL; aux = aux->prox){
-        fprintf(fp, "Nome: %s\nAutor: %s\nAno: %d\n",aux->livro.titulo,aux->livro.autor,aux->livro.ano);
+        fprintf(fp, "Nome: %s\nAutor: %s\nAno: %d\n",aux->titulo,aux->autor,aux->ano);
     }
 }
 

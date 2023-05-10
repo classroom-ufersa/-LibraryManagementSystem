@@ -32,7 +32,6 @@ Lista *cria_lista(void)
     l->prim= NULL;
     return l;
 }
-
 ///Fun�ao que insere um livro na lista.
 Lista* cadastro_Book(Lista* l, char* titulo){
     Book* novo;
@@ -47,12 +46,17 @@ if(novo == NULL){
     printf("\nERRO AO CADASTRAR BOOK!");
     exit(1);
 }
+    system("cls");
+        printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
+        printf("INFORME O NOME DO LIVRO\n");
+        printf("\n>>> ");
+        scanf("%s", &novo->titulo);
         printf("\nINFORME O AUTOR DO LIVRO\n");
         printf(">>> ");
-        scanf("%s", novo->autor);
+        scanf(" %s", novo->autor);
         printf("\nINFORME O ANO DO LIVRO\n");
         printf(">>> ");
-        scanf("%d", novo->ano);
+        scanf("%d", &novo->ano);
   if(ant == NULL){
         novo->prox = l->prim;
         l->prim=novo;
@@ -64,40 +68,21 @@ if(novo == NULL){
  system("pause");
     return l;
 }
-/*
+
 void imprime_lista(Lista* l){
-    Lista* aux;
+    Book* aux;
     if(aux == NULL){
         printf("ERRO AO EXIBIR...");
     }
     else
     {
-        for (aux = l; aux != NULL; aux = aux->prox)
+        for (aux = l->prim; aux != NULL; aux = aux->prox)
         {
-            printf("Nome: %s\nAutor: %s\nAno: %d\n", aux->livro.titulo, aux->livro.autor, aux->livro.ano);
+            printf("Nome: %s\nAutor: %s\nAno: %d\n", aux->titulo, aux->autor, aux->ano);
             system("pause");
         }
     }
 }
-
-
-
-
-
-Lista* busca_nome(Lista* l, char* nome){
-    Lista* aux = l;
-
-    for(aux = l; aux != NULL; aux = aux->prox){
-        if(aux->livro.titulo == nome){
-        printf("Nome: %s\nAutor: %s\nAno: %d\n",aux->livro.titulo,aux->livro.autor,aux->livro.ano);
-            return aux;
-        }
-        printf("livro nao encontrado...\n");
-        system("pause");
-    }
-    return NULL;
-}
-
 
 int lista_vazia(Lista* l){
     if(l == NULL){
@@ -106,9 +91,8 @@ int lista_vazia(Lista* l){
     return 0;
 }
 
-*/
 
-void insere_arquivoP(Lista* l, FILE* fp){
+void insere_arquivoP(Lista* l, FILE* fp, int contador){
     fp = fopen("biblioteca.txt", "w"); // Abre o arquivo_origem para leitura
     if (fp == NULL)
     {
@@ -120,5 +104,20 @@ void insere_arquivoP(Lista* l, FILE* fp){
     for(aux = l->prim; aux != NULL; aux = aux->prox){
         fprintf(fp, "Nome: %s\nAutor: %s\nAno: %d\n",aux->titulo,aux->autor,aux->ano);
     }
+   contador++;
     fclose(fp);
 }
+
+             ///Fun�ao que busca o paciente pelo nome.  
+void busca_nome(Lista* l, char* nome){
+    Book* aux;
+    for(aux = l->prim; aux != NULL; aux = aux->prox){
+        if(strcmp(aux->titulo, nome) == 0){
+         printf("Nome: %s\nAutor: %s\nAno: %d\n",aux->titulo,aux->autor,aux->ano);
+            }
+        }
+          printf("livro n�o encontrado.\n");
+                printf("\n");
+                system("pause");
+    }
+   
