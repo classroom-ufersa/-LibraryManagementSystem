@@ -48,11 +48,10 @@ Livro livros_preenche(void)
 void livros_add(Listalivro *p, FILE *arquivo)
 {
     Livro livro = *(p->prox->livro);
-    fprintf(arquivo, "Titulo: %s", livro.titulo);
-    fprintf(arquivo, "Ano: %d", livro.ano);
-    fprintf(arquivo, "Autor: %s", livro.autor);
-    fprintf(arquivo, "Biblioteca: 128");
-    fprintf(arquivo, "-----------------------------\n");
+    fprintf(arquivo, "Titulo: %s\n", livro.titulo);
+    fprintf(arquivo, "Ano: %d\n", livro.ano);
+    fprintf(arquivo, "Autor: %s\n", livro.autor);
+    fprintf(arquivo, "Biblioteca: 128\n");
 }
 
 Listalivro *lista_add(Listalivro *l, Livro livro)
@@ -104,13 +103,15 @@ Listalivro *busca_livro(Listalivro *l, char titulo[TAM_MAX])
 void lista_imprime(Listalivro *l)
 {
     Listalivro *p = l->prox;
+    printf("\n\n          LIVROS      \n");
     while (p != NULL)
     {
-        printf("\nTitulo: %s\n", p->livro->titulo);
-        printf("\nAno: %d\n", p->livro->ano);
-        printf("\nAutor: %s\n", p->livro->autor);
-        printf("\nBiblioteca: 128");
-        printf("\n");
+        printf("-----------------------------\n");
+        printf("Titulo: %s", p->livro->titulo);
+        printf("\nAno: %d", p->livro->ano);
+        printf("\nAutor: %s", p->livro->autor);
+        printf("\nBiblioteca: 128\n");
+        printf("-----------------------------\n");
         p = p->prox;
     }
     system("pause");

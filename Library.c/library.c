@@ -125,11 +125,11 @@ Biblioteca *excluir_livro(Listalivro *p, Biblioteca *h)
 
 void dados_biblioteca(Biblioteca *h)
 {
-    printf("\n---------SITEMA DE GERENCIAMENTE DE BIBLIOTECA----------\n");
+    printf("\nSISTEMA DE GERENCIAMENTE DE BIBLIOTECA      \n");
     printf("                                                                \n"
-           "      Bem-vindo a Biblioteca %s                                 \n"
-           "      Codigo: %d                                                \n"
-           "      Localizado na %s                                          \n"
-           "      Horario de funcionamento das 08:00 as 17:00               \n",
+           "Bem-vindo a Biblioteca %s                                 \n"
+           "Codigo: %d                                                \n"
+           "Localizado na %s                                          \n"
+           "Horario de funcionamento das 08:00 as 17:00               \n",
            h->nome, h->codigo, h->localizacao);
 }
