@@ -4,8 +4,8 @@
 
 int main()
 {
-    int op;
-    int quantidade;
+    int op = 0, num_livro = 0, id = 0;
+    int quantidade = 0;
     char nome[TAM_MAX];
     Listalivro *livrotemp = (Listalivro *)malloc(sizeof(Listalivro));
     FILE *arquivo;
@@ -42,6 +42,7 @@ int main()
         case 1:
             Sapiencia = cadastra_livros(Sapiencia, &quantidade);
             arquivo = add_arquivo(Sapiencia, caminho);
+            num_livro++;
             break;
         case 2:
             printf("Insira o nome do livro que deseja excluir: ");
@@ -49,9 +50,9 @@ int main()
             livrotemp = busca_livro(Sapiencia->lista, nome);
             excluir_livro(livrotemp, Sapiencia);
             add_arquivo(Sapiencia, caminho);
+            num_livro--;
             break;
         case 3:
-            dados_biblioteca(Sapiencia);
             lista_imprime(Sapiencia->lista);
             break;
         case 4:
@@ -73,6 +74,14 @@ int main()
             edita_livro(livrotemp);
             add_arquivo(Sapiencia, caminho);
             system("pause");
+            break;
+        case 6:
+            printf("Digite o codigo da biblioteca deseja consultar: ");
+            scanf(" %d", &id);
+            livrotemp = busca_id(Sapiencia->lista, id);
+            break;
+        case 7:
+            dados_lib(Sapiencia, num_livro);
             break;
         }
     } while (op != 8);

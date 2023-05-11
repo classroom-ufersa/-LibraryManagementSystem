@@ -28,7 +28,7 @@ Biblioteca *biblioteca_cria(void)
     h->livro = Livros;
     h->codigo = codigobiblioteca;
     strcpy(h->nome, "Sapiencia");
-    strcpy(h->localizacao, "Shopping de PDF");
+    strcpy(h->localizacao, "Centro de PDF");
     return h;
 }
 
@@ -39,7 +39,6 @@ Biblioteca *cadastra_livros(Biblioteca *h, int *qnt)
         printf("Capacidade máxima atingida!\n");
         exit(1);
     }
-    // Adicionando o paciente na lista do hospital
     Livro p = livros_preenche();
     h->lista = lista_add((h->lista), p);
     (*qnt)++;
@@ -105,7 +104,7 @@ Biblioteca *excluir_livro(Listalivro *p, Biblioteca *h)
 {
     if (p == NULL)
     {
-        return h; // não achou
+        return h;
     }
     else
     {
@@ -124,18 +123,32 @@ Biblioteca *excluir_livro(Listalivro *p, Biblioteca *h)
         }
         free(p);
         h->livro++;
-        printf("Paciente excluido com sucesso!\n\n");
+        printf("Livro excluido com sucesso!\n\n");
     }
+    system("pause");
     return h;
 }
 
 void dados_biblioteca(Biblioteca *h)
 {
     printf("\nSISTEMA DE GERENCIAMENTE DE BIBLIOTECA      \n");
-    printf("                                                                \n"
+    printf("                                                           \n"
            "Bem-vindo a Biblioteca %s                                 \n"
            "Codigo: %d                                                \n"
-           "Localizado na %s                                          \n"
+           "Localizado no %s                                          \n"
            "Horario de funcionamento das 08:00 as 17:00               \n",
            h->nome, h->codigo, h->localizacao);
+}
+
+void dados_lib(Biblioteca *h, int num)
+{
+    printf("\nSISTEMA DE GERENCIAMENTE DE BIBLIOTECA      \n");
+    printf("                                                           \n"
+           "Bem-vindo a Biblioteca %s                                 \n"
+           "Numero de livros : %d                                     \n"
+           "Codigo: %d                                                \n"
+           "Localizado no %s                                          \n"
+           "Horario de funcionamento das 08:00 as 17:00               \n",
+           h->nome, num, h->codigo, h->localizacao);
+    system("pause");
 }
