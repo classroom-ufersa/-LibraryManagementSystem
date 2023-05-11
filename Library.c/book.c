@@ -41,7 +41,7 @@ Livro livros_preenche(void)
     printf("Informe o autor do livro: ");
     printf("\n>>> ");
     scanf(" %[^\n]s", livro.autor);
-    printf("Informe a biblioteca: ");
+    printf("Informe o codigo da biblioteca: ");
     printf("\n>>> ");
     scanf("%d", &livro.biblioteca);
     printf("Informe o status do livro: ");
@@ -68,7 +68,7 @@ Listalivro *lista_add(Listalivro *l, Livro livro)
     {
         p = p->prox;
     }
-    // Criar um novo nó para o novo paciente
+
     Listalivro *novo_no = (Listalivro *)malloc(sizeof(Listalivro));
     if (novo_no == NULL)
     {
@@ -83,7 +83,6 @@ Listalivro *lista_add(Listalivro *l, Livro livro)
     }
     *novo_no->livro = livro;
 
-    // Inserir o novo paciente na posição correta
     novo_no->prox = p->prox;
     novo_no->prev = p;
     if (p->prox != NULL)
@@ -104,6 +103,24 @@ Listalivro *busca_livro(Listalivro *l, char titulo[TAM_MAX])
             return p;
         }
     }
+    return NULL;
+}
+
+Listalivro *busca_id(Listalivro *l, int id)
+{
+    Listalivro *p;
+    for (p = l; p != NULL; p = p->prox)
+    {
+        if (p->livro->biblioteca == id)
+        {
+            printf("\nTitulo: %s", p->livro->titulo);
+            printf("\nAno: %d", p->livro->ano);
+            printf("\nAutor: %s", p->livro->autor);
+            printf("\nBiblioteca: %d", p->livro->biblioteca);
+            printf("\nStatus: %s", p->livro->status);
+        }
+    }
+    system("pause");
     return NULL;
 }
 void edita_livro(Listalivro *p)
@@ -181,7 +198,7 @@ void lista_libera(Listalivro *l)
 void lista_imprime(Listalivro *l)
 {
     Listalivro *p = l->prox;
-    printf("\n\n          LIVROS      \n");
+    printf("\n\n   LIVROS CADASTRADOS     \n");
     while (p != NULL)
     {
         printf("-----------------------------\n");
