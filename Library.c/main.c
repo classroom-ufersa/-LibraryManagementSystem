@@ -9,9 +9,8 @@ int main()
     char nome[TAM_MAX];
     Listalivro *livrotemp = (Listalivro *)malloc(sizeof(Listalivro));
     FILE *arquivo;
-    char caminho[] = "C:/Users/ddegu/OneDrive/Documentos/GitHub/LibraryManagementSystem/Library.c/output/biblioteca.txt"; // caminho do arquivo txt (Varia de pc para pc)
+    char caminho[] = "C:/Users/ddegu/OneDrive/Documentos/GitHub/LibraryManagementSystem/Library.c/output/biblioteca.txt";
     arquivo = fopen(caminho, "r");
-    // abrindo arquivo
     if (arquivo == NULL)
     {
         printf("Erro ao abrir arquivo!");
@@ -60,11 +59,19 @@ int main()
             scanf(" %[^\n]s", nome);
             livrotemp = busca_livro(Sapiencia->lista, nome);
 
-            printf("\nTitulo: %s\n", livrotemp->livro->titulo);
-            printf("\nAno: %d\n", livrotemp->livro->ano);
-            printf("\nAutor: %s\n", livrotemp->livro->autor);
-            printf("\nBiblioteca: 128");
-            printf("\nStatus: Disponivel");
+            printf("\nTitulo: %s", livrotemp->livro->titulo);
+            printf("\nAno: %d", livrotemp->livro->ano);
+            printf("\nAutor: %s", livrotemp->livro->autor);
+            printf("\nBiblioteca: %d", livrotemp->livro->biblioteca);
+            printf("\nStatus: %s", livrotemp->livro->status);
+            system("pause");
+            break;
+        case 5:
+            printf("Insira o nome do livro que deseja editar: ");
+            scanf(" %[^\n]s", nome);
+            livrotemp = busca_livro(Sapiencia->lista, nome);
+            edita_livro(livrotemp);
+            add_arquivo(Sapiencia, caminho);
             system("pause");
             break;
         }
