@@ -168,6 +168,16 @@ void edita_livro(Listalivro *p)
     printf("\n");
 }
 
+void lista_libera(Listalivro *l)
+{
+    Listalivro *p = l;
+    while (p != NULL)
+    {
+        Listalivro *t = p->prox;
+        free(p);
+        p = t;
+    }
+}
 void lista_imprime(Listalivro *l)
 {
     Listalivro *p = l->prox;
