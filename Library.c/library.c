@@ -44,7 +44,9 @@ Biblioteca *cadastra_livros(Biblioteca *h, int *qnt)
     h->lista = lista_add((h->lista), p);
     (*qnt)++;
     (h->livro)--;
+    system("cls");
     printf("Livro adicionado com sucesso.\n\n");
+    system("pause");
     return h;
 }
 
@@ -80,11 +82,15 @@ void ler_arquivo(Biblioteca *h, char *caminho, int *num_livro)
     int i = 0;
     while (fgets(linha, 100, arquivo) != NULL)
     {
-        sscanf(linha, "Titulo: %[^\n]", livro.titulo);
+        sscanf(linha, "Titulo: %[^\n]s", livro.titulo);
         fgets(linha, 100, arquivo);
         sscanf(linha, "Ano: %d", &livro.ano);
         fgets(linha, 100, arquivo);
-        sscanf(linha, "Autor: %[^\n]", livro.autor);
+        sscanf(linha, "Autor: %[^\n]s", livro.autor);
+        fgets(linha, 100, arquivo);
+        sscanf(linha, "Biblioteca: %d", &livro.biblioteca);
+        fgets(linha, 100, arquivo);
+        sscanf(linha, "Status: %[^\n]s", livro.status);
         fgets(linha, 100, arquivo);
 
         h->lista = lista_add(h->lista, livro);
