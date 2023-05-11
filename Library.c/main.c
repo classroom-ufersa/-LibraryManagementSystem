@@ -1,14 +1,13 @@
 #include <stdio.h>
 #include <string.h>
-#include "book.c"
+#include "library.c"
 
 int main()
 {
     char titulo[50], nome[50];
     int op = 0, o, contador;
-    Lista *l= cria_lista();
-    FILE* fp;
-    
+    Lista *l = cria_lista();
+    FILE *fp;
 
     do
     {
@@ -29,42 +28,42 @@ int main()
         switch (op)
         {
         case 1:
-        cadastro_Book(l, titulo);
-        insere_arquivoP(l, fp, contador);
-         
+            cadastro_Book(l, titulo);
+            insere_arquivoP(l, fp);
+            contador++;
+
             break;
+            system("cls");
+            printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
+            printf("INFORME O NOME DO LIVRO QUE DESEJA BUSCAR\n");
+            printf("\n>>> ");
+            scanf(" %[^\n]s", &nome);
+            busca_nome(l, nome);
+
+        case 2:
+            system("cls");
+            printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
+            printf("INFORME O NOME DO LIVRO QUE DESEJA EXCLUIR\n");
+            printf("\n>>> ");
+            scanf(" %[^\n]s", &nome);
+            excluir_book(l, nome);
+
         case 3:
-        imprime_lista(l);
+            imprime_lista(l);
             break;
 
-            case 4:
-         system("cls");
-        printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
-        printf("INFORME O NOME DO LIVRO QUE DESEJA BUSCAR\n");
-        printf("\n>>> ");
-        scanf(" %[^\n]s", &nome);
-        system("cls");
-         printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
-         busca_nome(l, nome);
-                system("\n\npause");
-            
+        case 4:
+            system("cls");
+            printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
+            printf("INFORME O NOME DO LIVRO QUE DESEJA BUSCAR\n");
+            printf("\n>>> ");
+            scanf(" %[^\n]s", &nome);
+            system("cls");
+            printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
+            busca_nome(l, nome);
+            system("\n\npause");
 
             break;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         case 8:
             printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
