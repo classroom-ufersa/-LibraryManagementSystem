@@ -77,4 +77,6 @@ int main()
         }
     } while (op != 8);
     return op;
+    lista_libera(Sapiencia->lista);
+    free(Sapiencia);
 }
