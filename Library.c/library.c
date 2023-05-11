@@ -1,144 +1,135 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "library.h"
 #include "book.c"
-#define TAM_LINHA 100
+#define TAM_MAX 100
+#define Livros 150
+#define codigobiblioteca 128
 
-/// Fun�ao que cria uma lista vazia.
-Lista *cria_lista(void)
+struct biblioteca
 {
-    Lista *l = (Lista *)malloc(sizeof(Lista));
-    if (l == NULL)
+    char nome[15];
+    int codigo;
+    int livro;
+    int qtd_livros;
+    char localizacao[20];
+    Listalivro *lista;
+};
+
+Biblioteca *biblioteca_cria(void)
+{
+    Biblioteca *h = (Biblioteca *)malloc(sizeof(Biblioteca));
+    if (h == NULL)
     {
-        printf("\n\nErro de sistema lista\n");
-        system("pause");
+        printf("ERRO de alocacao de memoria!\n");
         exit(1);
     }
-    l->prim = NULL;
-    return l;
+    h->lista = lista_cria();
+    h->lista->prox = NULL;
+    h->lista->prev = NULL;
+    h->livro = Livros;
+    h->codigo = codigobiblioteca;
+    strcpy(h->nome, "Sapiencia");
+    strcpy(h->localizacao, "Shopping de PDF");
+    return h;
 }
-/// Fun�ao que insere um livro na lista.
-Lista *cadastro_Book(Lista *l, char *titulo)
+
+Biblioteca *cadastra_livros(Biblioteca *h, int *qnt)
 {
-    Book *novo;
-    Book *ant = NULL;
-    Book *p = l->prim;
-    while (p != NULL && strcmp(p->titulo, titulo) < 0)
+    if ((*qnt) == Livros)
     {
-        ant = p;
+        printf("Capacidade máxima atingida!\n");
+        exit(1);
+    }
+    // Adicionando o paciente na lista do hospital
+    Livro p = livros_preenche();
+    h->lista = lista_add((h->lista), p);
+    (*qnt)++;
+    (h->livro)--;
+    printf("Livro adicionado com sucesso.\n\n");
+    return h;
+}
+
+FILE *add_arquivo(Biblioteca *h, char *caminho)
+{
+    FILE *arquivo = fopen(caminho, "w");
+    if (arquivo == NULL)
+    {
+        printf("Erro ao abrir o arquivo.\n");
+        exit(1);
+    }
+    Listalivro *p = h->lista;
+    while (p->prox != NULL)
+    {
+        livros_add(p, arquivo);
         p = p->prox;
     }
-    novo = (Book *)malloc(sizeof(Book));
-    if (novo == NULL)
+    fclose(arquivo);
+    return arquivo;
+}
+
+void ler_arquivo(Biblioteca *h, char *caminho, int *num_livro)
+{
+    Livro livro;
+    FILE *arquivo = fopen(caminho, "r");
+    if (arquivo == NULL)
     {
-        printf("\nERRO AO CADASTRAR BOOK!");
+        printf("Erro ao abrir o arquivo.\n");
         exit(1);
     }
-    system("cls");
-    printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
-    printf("INFORME O NOME DO LIVRO\n");
-    printf("\n>>> ");
-    scanf("%s", novo->titulo);
-    printf("\nINFORME O AUTOR DO LIVRO\n");
-    printf(">>> ");
-    scanf(" %s", novo->autor);
-    printf("\nINFORME O ANO DO LIVRO\n");
-    printf(">>> ");
-    scanf("%d", &novo->ano);
-    if (ant == NULL)
+
+    char linha[100];
+    int i = 0;
+    while (fgets(linha, 100, arquivo) != NULL)
     {
-        novo->prox = l->prim;
-        l->prim = novo;
+        sscanf(linha, "Titulo: %[^\n]", livro.titulo);
+        fgets(linha, 100, arquivo);
+        sscanf(linha, "Ano: %d", &livro.ano);
+        fgets(linha, 100, arquivo);
+        sscanf(linha, "Autor: %[^\n]", livro.autor);
+        fgets(linha, 100, arquivo);
+
+        h->lista = lista_add(h->lista, livro);
+        i++;
+    }
+    fclose(arquivo);
+    *num_livro = i;
+    h->livro -= i;
+}
+
+Biblioteca *excluir_livro(Listalivro *p, Biblioteca *h)
+{
+    if (p == NULL)
+    {
+        return h; // não achou
     }
     else
     {
-        novo->prox = ant->prox;
-        ant->prox = novo;
-    }
-    system("pause");
-    printf("\nLIVRO CADASTRADO COM SUCESSO...\n");
-
-    return l;
-}
-
-void imprime_lista(Lista *l)
-{
-    Book *aux;
-    if (aux == NULL)
-    {
-        printf("ERRO AO EXIBIR...");
-    }
-    else
-    {
-        for (aux = l->prim; aux != NULL; aux = aux->prox)
+        // retira o elemento
+        if (h->lista == p) // testa se é o primeiro elemento
         {
-            printf("Nome: %s\nAutor: %s\nAno: %d\n\n", aux->titulo, aux->autor, aux->ano);
-        }
-    }
-    system("pause");
-}
-
-int lista_vazia(Lista *l)
-{
-    if (l == NULL)
-    {
-        printf("nenhum livro cadastrado...\n");
-    }
-    return 0;
-}
-
-FILE *insere_arquivoP(Lista *l, FILE *fp)
-{
-    fp = fopen("BLIBLIOTECA.txt", "w"); // Abre o arquivo_origem para leitura
-    if (fp == NULL)
-    {
-        printf("Erro ao abrir o sistema\n");
-        system("pause");
-    }
-
-    Book *aux;
-    for (aux = l->prim; aux != NULL; aux = aux->prox)
-    {
-        fprintf(fp, "Nome: %s\nAutor: %s\nAno: %d\n", aux->titulo, aux->autor, aux->ano);
-    }
-
-    fclose(fp);
-    return fp;
-}
-
-/// Fun�ao que busca o paciente pelo nome.
-void busca_nome(Lista *l, char *nome)
-{
-    Book *aux;
-    for (aux = l->prim; aux != NULL; aux = aux->prox)
-    {
-        if (strcmp(aux->titulo, nome) == 0)
-        {
-            printf("Nome: %s\nAutor: %s\nAno: %d\n", aux->titulo, aux->autor, aux->ano);
+            h->lista = p->prox;
         }
         else
         {
-            printf("livro n�o encontrado.\n");
-            printf("\n");
+            p->prev->prox = p->prox; // retira o do meio
         }
+        if (p->prox != NULL) // testa se é o ultimo elemento
+        {
+            p->prox->prev = p->prev;
+        }
+        free(p);
+        h->livro++;
+        printf("Paciente excluido com sucesso!\n\n");
     }
+    return h;
 }
 
-Lista *excluir_book(Lista *l, char *nome)
+void dados_biblioteca(Biblioteca *h)
 {
-    Book *aux;
-    if (aux != NULL)
-    {
-        for (aux = l->prim; aux != NULL; aux = aux->prox)
-        {
-            if (strcmp(aux->titulo, nome) == 0)
-            {
-                free(aux->titulo);
-                free(aux->autor);
-                free(aux->ano);
-            }
-        }
-    }
-    printf("livrro excluido com sucesso!\n\n");
-    return aux;
+    printf("\n---------SITEMA DE GERENCIAMENTE DE BIBLIOTECA----------\n");
+    printf("                                                                \n"
+           "      Bem-vindo a Biblioteca %s                                 \n"
+           "      Codigo: %d                                                \n"
+           "      Localizado na %s                                          \n"
+           "      Horario de funcionamento das 08:00 as 17:00               \n",
+           h->nome, h->codigo, h->localizacao);
 }

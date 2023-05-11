@@ -4,15 +4,28 @@
 
 int main()
 {
-    char titulo[50], nome[50];
-    int op = 0, o, contador;
-    Lista *l = cria_lista();
-    FILE *fp;
+    int op;
+    int quantidade;
+    char nome[TAM_MAX];
+    Listalivro *livrotemp = (Listalivro *)malloc(sizeof(Listalivro));
+    FILE *arquivo;
+    char caminho[] = "C:/Users/ddegu/OneDrive/Documentos/GitHub/LibraryManagementSystem/Library.c/output/biblioteca.txt"; // caminho do arquivo txt (Varia de pc para pc)
+    arquivo = fopen(caminho, "r");
+    // abrindo arquivo
+    if (arquivo == NULL)
+    {
+        printf("Erro ao abrir arquivo!");
+        exit(1);
+    }
+
+    Biblioteca *Sapiencia = biblioteca_cria();
+    ler_arquivo(Sapiencia, caminho, &quantidade);
+    dados_biblioteca(Sapiencia);
 
     do
     {
         system("cls");
-        printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
+        printf("\n-------  SISTEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
         printf("[1] - CADASTRA LIVRO NA BIBLIOTECA\n");
         printf("[2] - REMOVER LIVRO\n");
         printf("[3] - LISTAR LIVROS CADASTRADOS\n");
@@ -28,60 +41,31 @@ int main()
         switch (op)
         {
         case 1:
-            cadastro_Book(l, titulo);
-            insere_arquivoP(l, fp);
-            contador++;
-
+            Sapiencia = cadastra_livros(Sapiencia, &quantidade);
+            arquivo = add_arquivo(Sapiencia, caminho);
             break;
-            system("cls");
-            printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
-            printf("INFORME O NOME DO LIVRO QUE DESEJA BUSCAR\n");
-            printf("\n>>> ");
-            scanf(" %[^\n]s", &nome);
-            busca_nome(l, nome);
-
         case 2:
-            system("cls");
-            printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
-            printf("INFORME O NOME DO LIVRO QUE DESEJA EXCLUIR\n");
-            printf("\n>>> ");
-            scanf(" %[^\n]s", &nome);
-            excluir_book(l, nome);
-
+            printf("Insira o nome do livro que deseja excluir: ");
+            scanf(" %[^\n]s", nome);
+            livrotemp = busca_livro(Sapiencia->lista, nome);
+            excluir_livro(livrotemp, Sapiencia);
+            add_arquivo(Sapiencia, caminho);
+            break;
         case 3:
-            imprime_lista(l);
+            dados_biblioteca(Sapiencia);
+            lista_imprime(Sapiencia->lista);
             break;
-
         case 4:
-            system("cls");
-            printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
-            printf("INFORME O NOME DO LIVRO QUE DESEJA BUSCAR\n");
-            printf("\n>>> ");
-            scanf(" %[^\n]s", &nome);
-            system("cls");
-            printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
-            busca_nome(l, nome);
-            system("\n\npause");
+            printf("Insira o nome do livro que deseja buscar: ");
+            scanf(" %[^\n]s", nome);
+            livrotemp = busca_livro(Sapiencia->lista, nome);
 
-            break;
-
-        case 8:
-            printf("\n-------  SITEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
-            printf("DESEJA SAIR DO PROGRAMA\n");
-            printf("[1] - SIM\n[2] - NAO\n");
-            printf("\n>>> ");
-            scanf("%d", &o);
-            system("cls");
-            if (o == 1)
-            {
-                printf("OBRIGADO POR USAR O SISTEMA\n");
-                printf("VOLTE SEMPRE...\n");
-                exit(1);
-            }
-            else
-            {
-                op = 2;
-            }
+            printf("\nTitulo: %s\n", livrotemp->livro->titulo);
+            printf("\nAno: %d\n", livrotemp->livro->ano);
+            printf("\nAutor: %s\n", livrotemp->livro->autor);
+            printf("\nBiblioteca: 128");
+            printf("\nStatus: Disponivel");
+            system("pause");
             break;
         }
     } while (op != 8);
