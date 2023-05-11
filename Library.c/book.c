@@ -41,6 +41,12 @@ Livro livros_preenche(void)
     printf("Informe o autor do livro: ");
     printf("\n>>> ");
     scanf(" %[^\n]s", livro.autor);
+    printf("Informe a biblioteca: ");
+    printf("\n>>> ");
+    scanf("%d", &livro.biblioteca);
+    printf("Informe o status do livro: ");
+    printf("\n>>> ");
+    scanf(" %[^\n]s", livro.status);
 
     return livro;
 }
@@ -51,7 +57,8 @@ void livros_add(Listalivro *p, FILE *arquivo)
     fprintf(arquivo, "Titulo: %s\n", livro.titulo);
     fprintf(arquivo, "Ano: %d\n", livro.ano);
     fprintf(arquivo, "Autor: %s\n", livro.autor);
-    fprintf(arquivo, "Biblioteca: 128\n");
+    fprintf(arquivo, "Biblioteca: %d\n", livro.biblioteca);
+    fprintf(arquivo, "Status: %s\n", livro.status);
 }
 
 Listalivro *lista_add(Listalivro *l, Livro livro)
@@ -99,6 +106,67 @@ Listalivro *busca_livro(Listalivro *l, char titulo[TAM_MAX])
     }
     return NULL;
 }
+void edita_livro(Listalivro *p)
+{
+    int cont;
+    printf("\nTitulo: %s\n", p->livro->titulo);
+    printf("\nAno: %d\n", p->livro->ano);
+    printf("\nAutor: %s\n", p->livro->autor);
+    printf("\nBiblioteca: %d\n", p->livro->biblioteca);
+    printf("\nStatus: %s\n", p->livro->status);
+
+    do
+    {
+        printf("\nDeseja editar esse livro? (1-sim)(2-nao)\n");
+        printf("\n>>> ");
+        scanf("%d", &cont);
+        if (cont != 1 && cont != 2 && cont != 3)
+            printf("Erro: entrada invalida\n");
+    } while (cont != 1 && cont != 2 && cont != 3);
+
+    int op;
+    printf("\nO que voce deseja editar?\n");
+    printf("1 - Titulo\n");
+    printf("2 - Ano\n");
+    printf("3 - Autor\n");
+    printf("4 - Biblioteca\n");
+    printf("5 - Status\n");
+    printf("\n>>> ");
+    scanf("%d", &op);
+    switch (op)
+    {
+    case 1:
+        printf("\nDigite o novo titulo: ");
+        scanf(" %[^\n]s", p->livro->titulo);
+        printf("Livro atualizado!\n");
+        break;
+    case 2:
+        printf("\nDigite novo ano: ");
+        scanf("%d", &p->livro->ano);
+        printf("Livro atualizado!\n");
+        break;
+    case 3:
+        printf("\nDigite o novo autor: ");
+        scanf(" %[^\n]s", p->livro->autor);
+        printf("Livro atualizado!\n");
+        break;
+    case 4:
+        printf("Digite a nova biblioteca: ");
+        scanf("%d", &p->livro->biblioteca);
+        printf("Livro atualizado!\n");
+        break;
+    case 5:
+        printf("Digite o novo status: \n");
+        scanf(" %[^\n]s", p->livro->status);
+        printf("Livro atualizado!\n");
+        break;
+
+    default:
+        printf("Opcao invalida!\n");
+        break;
+    }
+    printf("\n");
+}
 
 void lista_imprime(Listalivro *l)
 {
@@ -110,7 +178,8 @@ void lista_imprime(Listalivro *l)
         printf("Titulo: %s", p->livro->titulo);
         printf("\nAno: %d", p->livro->ano);
         printf("\nAutor: %s", p->livro->autor);
-        printf("\nBiblioteca: 128\n");
+        printf("\nBiblioteca: %d", p->livro->biblioteca);
+        printf("\nStatus: %s\n", p->livro->status);
         printf("-----------------------------\n");
         p = p->prox;
     }
