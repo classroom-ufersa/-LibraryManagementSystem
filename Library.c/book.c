@@ -209,7 +209,7 @@ void lista_imprime(Listalivro *l)
 
     printf("\n\n===============================");
     printf("\n      LIVROS CADASTRADOS       ");
-    printf("\n===============================");
+    printf("\n===============================\n");
 
     while (p != NULL)
     {
@@ -219,6 +219,7 @@ void lista_imprime(Listalivro *l)
         printf("\nAutor: %s", p->livro->autor);
         printf("\nBiblioteca: %d", p->livro->biblioteca);
         printf("\nStatus: %s\n", p->livro->status);
+        printf("------------------------------\n");
 
         p = p->prox;
     }

@@ -130,23 +130,20 @@ Biblioteca *excluir_livro(Listalivro *p, Biblioteca *h)
 
 void dados_biblioteca(Biblioteca *h)
 {
-    printf("\nSISTEMA DE GERENCIAMENTE DE BIBLIOTECA      \n");
     printf("                                                           \n"
-           "Bem-vindo a Biblioteca %s                                 \n"
+           "Biblioteca %s                                 \n"
            "Codigo: %d                                                \n"
-           "Localizado no %s                                          \n"
+           "Localizada no %s                                          \n"
            "Horario de funcionamento das 08:00 as 17:00               \n",
            h->nome, h->codigo, h->localizacao);
 }
 
-void dados_lib(Biblioteca *h)
+void dados_lib(void)
 {
-    printf("\nSISTEMA DE GERENCIAMENTE DE BIBLIOTECA      \n");
     printf("                                                           \n"
-           "Bem-vindo a Biblioteca %s                                 \n"
-           "Codigo: %d                                                \n"
-           "Localizado no %s                                          \n"
-           "Horario de funcionamento das 08:00 as 17:00               \n",
-           h->nome, h->codigo, h->localizacao);
+           "Biblioteca  do Saber                                               \n"
+           "Codigo: 56                                               \n"
+           "Localizada na UFERSA de Pau dos Ferros                        \n"
+           "Horario de funcionamento das 07:00 as 18:00               \n");
     system("pause");
 }

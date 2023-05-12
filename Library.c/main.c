@@ -19,7 +19,6 @@ int main()
 
     Biblioteca *Sapiencia = biblioteca_cria();
     ler_arquivo(Sapiencia, caminho, &quantidade);
-    dados_biblioteca(Sapiencia);
 
     do
     {
@@ -79,7 +78,8 @@ int main()
             livrotemp = busca_id(Sapiencia->lista, id);
             break;
         case 7:
-            dados_lib(Sapiencia);
+            dados_biblioteca(Sapiencia);
+            dados_lib();
             break;
         case 8:
             printf("Deseja sair do sistema?\n");
