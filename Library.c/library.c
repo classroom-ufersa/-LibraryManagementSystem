@@ -9,7 +9,6 @@ struct biblioteca
     char nome[15];
     int codigo;
     int livro;
-    int qtd_livros;
     char localizacao[20];
     Listalivro *lista;
 };
