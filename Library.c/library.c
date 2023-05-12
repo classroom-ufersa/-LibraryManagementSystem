@@ -91,9 +91,8 @@ void ler_arquivo(Biblioteca *h, char *caminho, int *num_livro)
         fgets(linha, 100, arquivo);
         sscanf(linha, "Status: %[^\n]s", livro.status);
         fgets(linha, 100, arquivo);
-
-        h->lista = lista_add(h->lista, livro);
         i++;
+        h->lista = lista_add(h->lista, livro);
     }
     fclose(arquivo);
     *num_livro = i;
@@ -140,15 +139,14 @@ void dados_biblioteca(Biblioteca *h)
            h->nome, h->codigo, h->localizacao);
 }
 
-void dados_lib(Biblioteca *h, int num)
+void dados_lib(Biblioteca *h)
 {
     printf("\nSISTEMA DE GERENCIAMENTE DE BIBLIOTECA      \n");
     printf("                                                           \n"
            "Bem-vindo a Biblioteca %s                                 \n"
-           "Numero de livros : %d                                     \n"
            "Codigo: %d                                                \n"
            "Localizado no %s                                          \n"
            "Horario de funcionamento das 08:00 as 17:00               \n",
-           h->nome, num, h->codigo, h->localizacao);
+           h->nome, h->codigo, h->localizacao);
     system("pause");
 }

@@ -1,11 +1,13 @@
+// Incluindo bibliotecas
 #include <stdio.h>
 #include <stdlib.h>
 #include "string.h"
 #include <ctype.h>
 #include "book.h"
-
+// Definindo uma constante para o tamanho máximo do título
 #define TAM_MAX 100
 
+// Definindo uma struct para representar um livro
 struct livro
 {
     char titulo[TAM_MAX];
@@ -15,6 +17,7 @@ struct livro
     char status[50];
 };
 
+// Definindo uma struct para representar uma lista de livros
 struct listalivro
 {
     Livro *livro;
@@ -22,12 +25,14 @@ struct listalivro
     struct listalivro *prev;
 };
 
+// Função para criar uma nova lista de livros
 Listalivro *lista_cria(void)
 {
     Listalivro *l = (Listalivro *)malloc(sizeof(Listalivro));
     return l;
 }
 
+// Função para preencher os dados de um livro
 Livro livros_preenche(void)
 {
     Livro livro;
@@ -51,6 +56,7 @@ Livro livros_preenche(void)
     return livro;
 }
 
+// Função para adicionar um livro a um arquivo
 void livros_add(Listalivro *p, FILE *arquivo)
 {
     Livro livro = *(p->prox->livro);
@@ -59,6 +65,7 @@ void livros_add(Listalivro *p, FILE *arquivo)
     fprintf(arquivo, "Autor: %s\n", livro.autor);
     fprintf(arquivo, "Biblioteca: %d\n", livro.biblioteca);
     fprintf(arquivo, "Status: %s\n", livro.status);
+    fprintf(arquivo, "\n");
 }
 
 Listalivro *lista_add(Listalivro *l, Livro livro)
@@ -113,11 +120,13 @@ Listalivro *busca_id(Listalivro *l, int id)
     {
         if (p->livro->biblioteca == id)
         {
+            printf("\n------------------------------");
             printf("\nTitulo: %s", p->livro->titulo);
             printf("\nAno: %d", p->livro->ano);
             printf("\nAutor: %s", p->livro->autor);
             printf("\nBiblioteca: %d", p->livro->biblioteca);
             printf("\nStatus: %s", p->livro->status);
+            printf("\n------------------------------\n");
         }
     }
     system("pause");
@@ -125,22 +134,14 @@ Listalivro *busca_id(Listalivro *l, int id)
 }
 void edita_livro(Listalivro *p)
 {
-    int cont;
+
     printf("\nTitulo: %s\n", p->livro->titulo);
-    printf("\nAno: %d\n", p->livro->ano);
-    printf("\nAutor: %s\n", p->livro->autor);
-    printf("\nBiblioteca: %d\n", p->livro->biblioteca);
-    printf("\nStatus: %s\n", p->livro->status);
-
-    do
-    {
-        printf("\nDeseja editar esse livro? (1-sim)(2-nao)\n");
-        printf("\n>>> ");
-        scanf("%d", &cont);
-        if (cont != 1 && cont != 2 && cont != 3)
-            printf("Erro: entrada invalida\n");
-    } while (cont != 1 && cont != 2 && cont != 3);
-
+    printf("Ano: %d\n", p->livro->ano);
+    printf("Autor: %s\n", p->livro->autor);
+    printf("Biblioteca: %d\n", p->livro->biblioteca);
+    printf("Status: %s\n", p->livro->status);
+    system("pause");
+    system("cls");
     int op;
     printf("\nO que voce deseja editar?\n");
     printf("1 - Titulo\n");
@@ -195,20 +196,32 @@ void lista_libera(Listalivro *l)
         p = t;
     }
 }
+
 void lista_imprime(Listalivro *l)
 {
+    if (l == NULL || l->prox == NULL)
+    {
+        printf("A lista está vazia.\n");
+        return;
+    }
+
     Listalivro *p = l->prox;
-    printf("\n\n   LIVROS CADASTRADOS     \n");
+
+    printf("\n\n===============================");
+    printf("\n      LIVROS CADASTRADOS       ");
+    printf("\n===============================");
+
     while (p != NULL)
     {
-        printf("-----------------------------\n");
-        printf("Titulo: %s", p->livro->titulo);
+        printf("\n------------------------------");
+        printf("\nTitulo: %s", p->livro->titulo);
         printf("\nAno: %d", p->livro->ano);
         printf("\nAutor: %s", p->livro->autor);
         printf("\nBiblioteca: %d", p->livro->biblioteca);
         printf("\nStatus: %s\n", p->livro->status);
-        printf("-----------------------------\n");
+
         p = p->prox;
     }
+
     system("pause");
 }

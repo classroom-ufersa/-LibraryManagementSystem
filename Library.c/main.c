@@ -4,7 +4,7 @@
 
 int main()
 {
-    int op = 0, num_livro = 0, id = 0;
+    int op = 0, id = 0;
     int quantidade = 0;
     char nome[TAM_MAX];
     Listalivro *livrotemp = (Listalivro *)malloc(sizeof(Listalivro));
@@ -25,12 +25,12 @@ int main()
     {
         system("cls");
         printf("\n-------  SISTEMA DE GERENCIAMENTE DE BIBLIOTECA ---------\n\n");
-        printf("[1] - CADASTRA LIVRO NA BIBLIOTECA\n");
+        printf("[1] - ADICIONAR LIVRO\n");
         printf("[2] - REMOVER LIVRO\n");
         printf("[3] - LISTAR LIVROS CADASTRADOS\n");
         printf("[4] - BUSCAR LIVRO\n");
         printf("[5] - EDITAR LIVRO\n");
-        printf("[6] - CONSUTAR LIVRO EM UMA DADA BIBLIOTECA\n");
+        printf("[6] - CONSUTAR LIVROS EM UMA DADA BIBLIOTECA\n");
         printf("[7] - CONSULTAR QUANTITATIVO DE BIBLIOTECA\n");
         printf("[8] - SAIR DO PROGRAMA\n");
         printf("\n>>> ");
@@ -42,7 +42,6 @@ int main()
         case 1:
             Sapiencia = cadastra_livros(Sapiencia, &quantidade);
             arquivo = add_arquivo(Sapiencia, caminho);
-            num_livro++;
             break;
         case 2:
             printf("Insira o nome do livro que deseja excluir: ");
@@ -50,7 +49,6 @@ int main()
             livrotemp = busca_livro(Sapiencia->lista, nome);
             excluir_livro(livrotemp, Sapiencia);
             add_arquivo(Sapiencia, caminho);
-            num_livro--;
             break;
         case 3:
             lista_imprime(Sapiencia->lista);
@@ -60,11 +58,11 @@ int main()
             scanf(" %[^\n]s", nome);
             livrotemp = busca_livro(Sapiencia->lista, nome);
 
-            printf("\nTitulo: %s", livrotemp->livro->titulo);
-            printf("\nAno: %d", livrotemp->livro->ano);
-            printf("\nAutor: %s", livrotemp->livro->autor);
-            printf("\nBiblioteca: %d", livrotemp->livro->biblioteca);
-            printf("\nStatus: %s", livrotemp->livro->status);
+            printf("Titulo: %s\n", livrotemp->livro->titulo);
+            printf("Ano: %d\n", livrotemp->livro->ano);
+            printf("Autor: %s\n", livrotemp->livro->autor);
+            printf("Biblioteca: %d\n", livrotemp->livro->biblioteca);
+            printf("Status: %s\n", livrotemp->livro->status);
             system("pause");
             break;
         case 5:
@@ -81,8 +79,24 @@ int main()
             livrotemp = busca_id(Sapiencia->lista, id);
             break;
         case 7:
-            dados_lib(Sapiencia, num_livro);
+            dados_lib(Sapiencia);
             break;
+        case 8:
+            printf("Deseja sair do sistema?\n");
+            printf("[1] - SIM \n[2] - NAO\n");
+            printf("\n>>> ");
+            scanf("%d", &op);
+            if (op == 1)
+            {
+                system("cls");
+                printf("\n\n==========================================");
+                printf("\n     OBRIGADO POR USAR NOSSO SISTEMA!!       ");
+                printf("\n==========================================\n");
+                exit(1);
+            }
+        default:
+            printf("Opcao invalida, tente novamente!!\n");
+            system("pause");
         }
     } while (op != 8);
     return op;
